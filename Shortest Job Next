@@ -1,0 +1,77 @@
+package it.edu.iisgubbio.sjn;
+
+public class Sjn {
+	public static void main(String[] args) {
+		String processi [] = new String [4];                    //vector declaration of process' names
+		int tArrivo[]=new int[4];                               //vector declaration of process' arrival times
+		int tEsecuzione[]=new int[4];                           //vector declaration of process' execution times   
+		int tServizio[]=new int[4];                             //vector declaration of process' service times       
+		int tAttesa[]=new int[4];                               //vector declaration of process' waiting times            
+		double media=0;                                         //var declaration of average waiting time       
+		{
+
+			//tEsecuzione[0]=(int) (Math.random()*7+2);
+			//tEsecuzione[1]=(int) (Math.random()*7+2);
+			//tEsecuzione[2]=(int) (Math.random()*7+2);
+			//tEsecuzione[3]=(int) (Math.random()*7+2);
+
+			tEsecuzione[0]=5;                                   //manual assignment 
+			tEsecuzione[1]=3;                                   //of process' execution 
+			tEsecuzione[2]=8;                                   //    times 
+			tEsecuzione[3]=6;                                   //                
+			
+			for(int i=0; i< 4; i++) {                           // for used to assign    
+				processi[i]="p"+i;                              // 1)names to process
+				tArrivo[i]=i;                                   // 2)arriving times to process
+                                                                            
+			}
+
+			int superficie;                                     //  bubble sort variables and index  
+			int posizione;                                      //            
+			int primo=0;                                        //                        
+			int ultimo=tEsecuzione.length-1;                    //                    
+			int appoggio;                                       //        
+   
+			String appNome;
+			int appArrivo;
+			for(superficie=primo;superficie<=ultimo-1;superficie++){                    //bubble sort cycles
+				for(posizione=ultimo-1;posizione>=superficie;posizione--){              //
+					if(tEsecuzione[posizione]>tEsecuzione[posizione+1]){                //if controlling execution times
+    
+						appoggio=tEsecuzione[posizione];                              //sorting execution times
+						tEsecuzione[posizione]=tEsecuzione[posizione+1];              //in crescent order
+						tEsecuzione[posizione+1]=appoggio;                            //  
+
+						appNome=processi[posizione];                                  //sorting process' names
+						processi[posizione]=processi[posizione+1];                    //  
+						processi[posizione+1]=appNome;                                //  
+                                                                                                        
+						appArrivo=tArrivo[posizione];                                 //sorting arriving times  
+						tArrivo[posizione]=tArrivo[posizione+1];                      //              
+						tArrivo[posizione+1]=appArrivo;                               //                             
+
+					}
+				}
+			}
+
+
+		}
+		
+		tServizio[0]=0;                                           //  calculating service times 
+		tServizio[1]=tEsecuzione[0];                              //            
+		tServizio[2]=tEsecuzione[1]+tServizio[1];                 //                          
+		tServizio[3]=tEsecuzione[2]+tServizio[2];                 //                      
+
+		for(int i=0; i<4; i++) {                                 //calculating waiting times       
+			tAttesa[i]= tServizio[i]-tArrivo[i];                 //                                                               
+			if(tAttesa[i]<0) {tAttesa[i]=0;}                     //               
+			media+=tAttesa[i];                                   //                   
+		}                                                                       
+		for(int i= 0; i<4; i++) {               // cycle for to print output
+
+			System.out.println(processi[i]+" arrivato a "+tArrivo[i]+" con Esecuzione "+tEsecuzione[i]+" e Servizio "+tServizio[i]+" attesa "+tAttesa[i] );
+		}
+		System.out.println("il tempo d'attesa medio è: "+media/processi.length);
+	}
+
+}
