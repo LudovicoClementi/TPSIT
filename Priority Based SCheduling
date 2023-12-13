@@ -1,0 +1,85 @@
+package it.edu.iisgubbio.pbs;
+
+public class priorita {
+	public static void main(String[] args) {
+		String processi [] = new String [4];            //vector declaration of process' names  
+		int tArrivo[]=new int[4];                       //vector declaration of process' arrival times
+		int tEsecuzione[]=new int[4];                   //vector declaration of process' execution times  
+		int tServizio[]=new int[4];                     //vector declaration of process' CPU service times
+		int tAttesa[]=new int[4];                       //vector declaration of process' waiting times
+		double media=0;                                 //var declaration of average waiting time
+		int prio[]=new int[4];                          //vector declaration of process' priority values    
+		{
+			
+			prio[0]=5;                       //manual assignment
+			prio[1]=8;                       //of process'      
+			prio[2]=3;                       //priority
+			prio[3]=1;                       //values  
+				
+		tEsecuzione[0]=5;                    //manual assignment
+		tEsecuzione[1]=3;                    //of process' execution  times                   
+		tEsecuzione[2]=8;                    //used for the                                     
+		tEsecuzione[3]=6;                    //exercise 
+		
+		
+			for(int i=0; i< 4; i++) {        //for used to name processes as p0,p1,p2,p3
+				processi[i]="p"+i;
+				tArrivo[i]=i;
+
+			}
+
+			int superficie;                         //variables used to 
+			int posizione;                          //make the bubble sort
+			int primo=0;                            //work
+			int ultimo=tEsecuzione.length-1;        //               
+			int appoggio;                           //
+			int appoggioPrio;                       //  
+		
+			String appNome;
+			int appArrivo;                                                      //bubble sort
+			for(superficie=primo;superficie<=ultimo-1;superficie++){            //       
+				for(posizione=ultimo-1;posizione>=superficie;posizione--){      //              
+					if(prio[posizione]<prio[posizione+1]){      //if sort by controlling prio values                  
+                                                                                   
+						appoggioPrio=prio[posizione];                           //                 
+						prio[posizione]=prio[posizione+1];                      //     sort  
+						prio[posizione+1]=appoggioPrio;                         // priority vector
+						                                                                              
+						appoggio=tEsecuzione[posizione];                        //sort execution's
+						tEsecuzione[posizione]=tEsecuzione[posizione+1];        //   times        
+						tEsecuzione[posizione+1]=appoggio;                      //      
+                                                                            
+						appNome=processi[posizione];                          //sort vector processi
+						processi[posizione]=processi[posizione+1];            //              
+						processi[posizione+1]=appNome;                        //  
+                                                                              
+						appArrivo=tArrivo[posizione];                        // sort 
+						tArrivo[posizione]=tArrivo[posizione+1];             // arriving times       
+						tArrivo[posizione+1]=appArrivo;                      //        
+
+					}
+				}
+			}
+
+
+		}
+		
+		tServizio[0]=0;                                     //service time calculation
+		tServizio[1]=tEsecuzione[0];                        //
+		tServizio[2]=tEsecuzione[1]+tServizio[1];           //
+		tServizio[3]=tEsecuzione[2]+tServizio[2];           //
+
+	for(int i=0; i<4; i++) {                        //Calculation of
+		tAttesa[i]= tServizio[i]-tArrivo[i];        //
+		 if(tAttesa[i]<0) {tAttesa[i]=0;}           //processes's
+		media+=tAttesa[i];                          //waiting times
+		}            
+		
+		for(int i= 0; i<4; i++) {       //output 
+
+			System.out.println(processi[i]+" arrivato a "+tArrivo[i]+" con Esecuzione "+tEsecuzione[i]+" e Servizio "+tServizio[i]+" attesa "+tAttesa[i] );
+		}
+		System.out.println("il tempo d'attesa medio è: "+media/processi.length);
+	}
+
+}
