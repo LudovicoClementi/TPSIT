@@ -1,0 +1,34 @@
+VIDEO
+package iisgubbio.edu.it.schedulingVideo;
+
+public class Video {
+
+	int durataVideo;
+	String idVideo;
+	int tempoASchermoTotale;
+	
+	public Video(int durata,String id, int tast){
+		durataVideo=durata;
+		idVideo=id;
+		tempoASchermoTotale=tast;
+	}
+
+}
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------------
+SCHEDULER
+package iisgubbio.edu.it.schedulingVideo;
+
+public class Scheduler {
+	int tempoTotale =120;
+	int[] vInfoVideo;
+	
+	public Scheduler (int tempoTot, int[] infoVideo) {
+		tempoTotale=tempoTot;
+		vInfoVideo=infoVideo;
+	}
+	
+	void ordinamento () {
+		
+	}
+}
